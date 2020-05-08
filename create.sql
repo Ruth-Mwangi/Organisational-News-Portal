@@ -1,0 +1,35 @@
+CREATE DATABASE organisational_news_portal;
+\c organisational_news_portal
+
+CREATE TABLE departments (
+id SERIAL PRIMARY KEY,
+name VARCHAR
+);
+
+CREATE TABLE news (
+id SERIAL PRIMARY KEY,
+news_type VARCHAR,
+department_name VARCHAR,
+title VARCHAR,
+description VARCHAR
+);
+
+CREATE TABLE staff (
+id SERIAL PRIMARY KEY,
+name VARCHAR,
+position VARCHAR,
+staff_role VARCHAR
+);
+
+CREATE TABLE users_departments (
+id SERIAL PRIMARY KEY,
+user_id INT,
+department_id INT
+);
+
+
+
+
+
+CREATE DATABASE organisational_news_portal_test WITH TEMPLATE organisational_news_portal;
+
