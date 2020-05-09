@@ -51,6 +51,17 @@ public class Sql2oUsersDaoTest {
         assertEquals(user.getName(),sql2oUsersDao.findById(user.getId()).getName());
     }
 
+    @Test
+    public void allInstancesAreReturned() {
+
+        Users users=setUpNewUser();
+        Users otherUser= new Users("Wangui","intern","Paper work");
+        sql2oUsersDao.add(users);
+        sql2oUsersDao.add(otherUser);
+        assertEquals(users.getName(),sql2oUsersDao.getAll().get(0).getName());
+        assertEquals(otherUser.getName(),sql2oUsersDao.getAll().get(1).getName());
+    }
+
     //helper
     private Users setUpNewUser() {
         return new Users("Ruth Mwangi","manager","Editor");
