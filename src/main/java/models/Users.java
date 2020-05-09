@@ -9,10 +9,12 @@ public class Users {
     private String position;
     private String role;
 
+
     public Users(String name, String position, String role) {
         this.name = name;
         this.position = position;
         this.role = role;
+
     }
 
     public int getId() {
@@ -31,6 +33,9 @@ public class Users {
         return role;
     }
 
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,7 +44,8 @@ public class Users {
         return id == users.id &&
                 Objects.equals(name, users.name) &&
                 Objects.equals(position, users.position) &&
-                Objects.equals(role, users.role);
+                Objects.equals(role, users.role) ;
+
     }
 
     @Override
