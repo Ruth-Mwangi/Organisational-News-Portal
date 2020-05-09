@@ -1,0 +1,12 @@
+/home/wangui/IdeaProjects/Organisational News Portal/src/main/java/models/Users.java
+/home/wangui/IdeaProjects/Organisational News Portal/src/main/java/dao/UsersDao.java
+/home/wangui/IdeaProjects/Organisational News Portal/src/main/java/models/Departments.java
+/home/wangui/IdeaProjects/Organisational News Portal/src/main/java/dao/Sql2oDepartmentsDao.java
+/home/wangui/IdeaProjects/Organisational News Portal/src/main/java/App.java
+/home/wangui/IdeaProjects/Organisational News Portal/src/main/java/models/Department_News.java
+/home/wangui/IdeaProjects/Organisational News Portal/src/main/java/dao/DepartmentsDao.java
+/home/wangui/IdeaProjects/Organisational News Portal/src/main/java/exceptions/ApiException.java
+/home/wangui/IdeaProjects/Organisational News Portal/src/main/java/models/News.java
+/home/wangui/IdeaProjects/Organisational News Portal/src/main/java/dao/NewsDao.java
+/home/wangui/IdeaProjects/Organisational News Portal/src/main/java/dao/Sql2oUsersDao.java
+/home/wangui/IdeaProjects/Organisational News Portal/src/main/java/dao/Sql2oNewsDao.java

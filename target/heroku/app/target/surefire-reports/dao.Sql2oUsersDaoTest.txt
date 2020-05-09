@@ -1,0 +1,32 @@
+-------------------------------------------------------------------------------
+Test set: dao.Sql2oUsersDaoTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 5, Skipped: 0, Time elapsed: 9.783 sec <<< FAILURE! - in dao.Sql2oUsersDaoTest
+addingUserToDbSetsUserId(dao.Sql2oUsersDaoTest)  Time elapsed: 2.842 sec  <<< ERROR!
+org.sql2o.Sql2oException: Could not acquire a connection from DataSource - FATAL: no pg_hba.conf entry for host "41.212.116.98", user "fvvikmppgjhovk", database "da93g9c21mukon", SSL off
+	at dao.Sql2oUsersDaoTest.setUp(Sql2oUsersDaoTest.java:33)
+Caused by: org.postgresql.util.PSQLException: FATAL: no pg_hba.conf entry for host "41.212.116.98", user "fvvikmppgjhovk", database "da93g9c21mukon", SSL off
+	at dao.Sql2oUsersDaoTest.setUp(Sql2oUsersDaoTest.java:33)
+
+addedUserIsReturnedCorrectly(dao.Sql2oUsersDaoTest)  Time elapsed: 2.444 sec  <<< ERROR!
+org.sql2o.Sql2oException: Could not acquire a connection from DataSource - FATAL: no pg_hba.conf entry for host "41.212.116.98", user "fvvikmppgjhovk", database "da93g9c21mukon", SSL off
+	at dao.Sql2oUsersDaoTest.setUp(Sql2oUsersDaoTest.java:33)
+Caused by: org.postgresql.util.PSQLException: FATAL: no pg_hba.conf entry for host "41.212.116.98", user "fvvikmppgjhovk", database "da93g9c21mukon", SSL off
+	at dao.Sql2oUsersDaoTest.setUp(Sql2oUsersDaoTest.java:33)
+
+getDepartmentsUserIsIn(dao.Sql2oUsersDaoTest)  Time elapsed: 2.256 sec  <<< ERROR!
+org.sql2o.Sql2oException: Could not acquire a connection from DataSource - FATAL: no pg_hba.conf entry for host "41.212.116.98", user "fvvikmppgjhovk", database "da93g9c21mukon", SSL off
+	at dao.Sql2oUsersDaoTest.setUp(Sql2oUsersDaoTest.java:33)
+Caused by: org.postgresql.util.PSQLException: FATAL: no pg_hba.conf entry for host "41.212.116.98", user "fvvikmppgjhovk", database "da93g9c21mukon", SSL off
+	at dao.Sql2oUsersDaoTest.setUp(Sql2oUsersDaoTest.java:33)
+
+allInstancesAreReturned(dao.Sql2oUsersDaoTest)  Time elapsed: 2.135 sec  <<< ERROR!
+org.sql2o.Sql2oException: Could not acquire a connection from DataSource - FATAL: no pg_hba.conf entry for host "41.212.116.98", user "fvvikmppgjhovk", database "da93g9c21mukon", SSL off
+	at dao.Sql2oUsersDaoTest.setUp(Sql2oUsersDaoTest.java:33)
+Caused by: org.postgresql.util.PSQLException: FATAL: no pg_hba.conf entry for host "41.212.116.98", user "fvvikmppgjhovk", database "da93g9c21mukon", SSL off
+	at dao.Sql2oUsersDaoTest.setUp(Sql2oUsersDaoTest.java:33)
+
+dao.Sql2oUsersDaoTest  Time elapsed: 2.136 sec  <<< ERROR!
+java.lang.NullPointerException
+	at dao.Sql2oUsersDaoTest.shutDown(Sql2oUsersDaoTest.java:45)
+
