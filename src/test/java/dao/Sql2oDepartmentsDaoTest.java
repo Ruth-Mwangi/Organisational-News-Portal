@@ -1,6 +1,7 @@
 package dao;
 
 import models.Departments;
+import models.Users;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -49,13 +50,23 @@ public class Sql2oDepartmentsDaoTest {
 
 
     @Test
-    public void addUserToDepartment() {
+    public void addUserToDepartmentAndReturn() {
+        Departments department=setUpNewDepartment();
+        sql2oDepartmentsDao.add(department);
+        Users user=setUpNewUser();
+        Users otherUser= new Users("Wangui","intern","Paper work");
+        sql2oUsersDao.add(user);
+        sql2oUsersDao.add(otherUser);
+        sql2oDepartmentsDao.addUserToDepartment(user,department);
+        sql2oDepartmentsDao.addUserToDepartment(otherUser,department);
+        assertEquals(2,sql2oDepartmentsDao.getAllUsersInDepartment(department.getId()).size());
+        assertEquals(2,sql2oDepartmentsDao.findById(department.getId()).getSize());
     }
 
     @Test
     public void getAll() {
         Departments department=setUpNewDepartment();
-        Departments otherDepartment=new Departments("printing");
+        Departments otherDepartment=new Departments("printing","printing of books");
         sql2oDepartmentsDao.add(department);
         sql2oDepartmentsDao.add(otherDepartment);
         assertEquals(department,sql2oDepartmentsDao.getAll().get(0));
@@ -65,7 +76,7 @@ public class Sql2oDepartmentsDaoTest {
     @Test
     public void correctDepartmentIsReturnedFindById() {
         Departments department=setUpNewDepartment();
-        Departments otherDepartment=new Departments("printing");
+        Departments otherDepartment=new Departments("printing","printing of books");
         sql2oDepartmentsDao.add(department);
         sql2oDepartmentsDao.add(otherDepartment);
         assertEquals(department,sql2oDepartmentsDao.findById(department.getId()));
@@ -73,12 +84,13 @@ public class Sql2oDepartmentsDaoTest {
 
     }
 
-    @Test
-    public void getAllUsersInDepartment() {
-    }
+
 
     //helper
     private Departments setUpNewDepartment() {
-        return new Departments("Editing");
+        return new Departments("Editing","editing of newspaper");
+    }
+    private Users setUpNewUser() {
+        return new Users("Ruth Mwangi","manager","Editor");
     }
 }

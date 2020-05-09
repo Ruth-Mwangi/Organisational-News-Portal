@@ -14,7 +14,7 @@ public interface DepartmentsDao {
 
     List<Departments> getAll();
     Departments findById(int id);
-    List<Users> getAllUsersInDepartment(int id);
+    List<Users> getAllUsersInDepartment(int department_id);
     //update
     //delete
     void clearAll();
