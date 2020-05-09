@@ -21,6 +21,13 @@ public class News {
         this.news_type=TYPE_OF_NEWS;
         this.department_id=0;
     }
+    public News(String title, String description,int department_id, int user_id){
+        this.title = title;
+        this.description = description;
+        this.user_id=user_id;
+        this.department_id = department_id;
+        this.news_type="department";
+    }
 
     public int getId() {
         return id;
