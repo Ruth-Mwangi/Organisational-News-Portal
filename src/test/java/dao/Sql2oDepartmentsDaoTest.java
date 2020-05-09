@@ -57,7 +57,7 @@ public class Sql2oDepartmentsDaoTest {
     }
 
     @Test
-    public void findById() {
+    public void correectUserIsReturnedFindById() {
     }
 
     @Test

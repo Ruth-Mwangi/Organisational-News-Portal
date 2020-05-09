@@ -43,7 +43,13 @@ public class Sql2oDepartmentsDao implements DepartmentsDao {
 
     @Override
     public Departments findById(int id) {
-        return null;
+        try (Connection con=sql2o.open()){
+            String sql= "SELECT * FROM departments WHERE id=:id";
+            return con.createQuery(sql)
+                    .addParameter("id",id)
+                    .executeAndFetchFirst(Departments.class);
+
+        }
     }
 
     @Override
@@ -57,6 +63,8 @@ public class Sql2oDepartmentsDao implements DepartmentsDao {
             String sql="DELETE FROM departments";
             con.createQuery(sql).executeUpdate();
 
+        }catch (Sql2oException e){
+            System.out.println(e);
         }
     }
 }
