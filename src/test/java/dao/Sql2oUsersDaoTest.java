@@ -1,10 +1,14 @@
 package dao;
 
+import models.Users;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+
+import static org.junit.Assert.*;
 
 public class Sql2oUsersDaoTest {
 
@@ -32,5 +36,16 @@ public class Sql2oUsersDaoTest {
         System.out.println("connection closed");
     }
 
+    @Test
+    public void addingUserToDbSetsUserId() {
+        Users user = setUpNewUser();
+        int originalId= user.getId();
+        sql2oUsersDao.add(user);
+        assertNotEquals(originalId,user.getId());
+    }
 
+    //helper
+    private Users setUpNewUser() {
+        return new Users("Ruth Mwangi","manager","Editor");
+    }
 }
