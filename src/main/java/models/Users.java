@@ -29,7 +29,7 @@ public class Users {
         return position;
     }
 
-    public String getStaff_Role() {
+    public String getStaff_role() {
         return staff_role;
     }
 
