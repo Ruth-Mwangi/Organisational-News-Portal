@@ -44,6 +44,13 @@ public class Sql2oUsersDaoTest {
         assertNotEquals(originalId,user.getId());
     }
 
+    @Test
+    public void addedUserIsReturnedCorrectly() {
+        Users user = setUpNewUser();
+        sql2oUsersDao.add(user);
+        assertEquals(user.getName(),sql2oUsersDao.findById(user.getId()).getName());
+    }
+
     //helper
     private Users setUpNewUser() {
         return new Users("Ruth Mwangi","manager","Editor");

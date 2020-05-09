@@ -7,13 +7,13 @@ public class Users {
     private int id;
     private  String name;
     private String position;
-    private String role;
+    private String staff_role;
 
 
-    public Users(String name, String position, String role) {
+    public Users(String name, String position, String staff_role) {
         this.name = name;
         this.position = position;
-        this.role = role;
+        this.staff_role = staff_role;
 
     }
 
@@ -29,8 +29,8 @@ public class Users {
         return position;
     }
 
-    public String getRole() {
-        return role;
+    public String getStaff_Role() {
+        return staff_role;
     }
 
     public void setId(int id) {
@@ -45,12 +45,12 @@ public class Users {
         return id == users.id &&
                 Objects.equals(name, users.name) &&
                 Objects.equals(position, users.position) &&
-                Objects.equals(role, users.role) ;
+                Objects.equals(staff_role, users.staff_role) ;
 
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, position, role);
+        return Objects.hash(id, name, position, staff_role);
     }
 }
