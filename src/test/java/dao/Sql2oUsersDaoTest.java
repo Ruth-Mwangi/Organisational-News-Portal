@@ -31,7 +31,7 @@ public class Sql2oUsersDaoTest {
     }
 
     @AfterClass
-    public static void shutDown() throws Exception{ //changed to static
+    public static void shutDown() throws Exception{
         conn.close();
         System.out.println("connection closed");
     }
