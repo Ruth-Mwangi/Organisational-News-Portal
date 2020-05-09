@@ -57,7 +57,14 @@ public class Sql2oDepartmentsDaoTest {
     }
 
     @Test
-    public void correectUserIsReturnedFindById() {
+    public void correctDepartmentIsReturnedFindById() {
+        Departments department=setUpNewDepartment();
+        Departments otherDepartment=new Departments("printing");
+        sql2oDepartmentsDao.add(department);
+        sql2oDepartmentsDao.add(otherDepartment);
+        assertEquals(department,sql2oDepartmentsDao.findById(department.getId()));
+        assertEquals(otherDepartment,sql2oDepartmentsDao.findById(otherDepartment.getId()));
+
     }
 
     @Test
