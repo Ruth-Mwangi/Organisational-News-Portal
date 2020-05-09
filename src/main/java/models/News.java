@@ -5,7 +5,7 @@ import java.util.Objects;
 public class News {
 
     private int id;
-    private String type;
+    private String news_type;
     private int department_id;
     private String title;
     private String description;
@@ -14,7 +14,7 @@ public class News {
     public News(String title, String description) {
         this.title = title;
         this.description = description;
-        this.type=TYPE_OF_NEWS;
+        this.news_type=TYPE_OF_NEWS;
         this.department_id=0;
     }
 
@@ -22,8 +22,8 @@ public class News {
         return id;
     }
 
-    public String getType() {
-        return type;
+    public String getNews_type() {
+        return news_type;
     }
 
     public int getDepartment_id() {
@@ -49,13 +49,13 @@ public class News {
         News news = (News) o;
         return id == news.id &&
                 department_id == news.department_id &&
-                Objects.equals(type, news.type) &&
+                Objects.equals(news_type, news.news_type) &&
                 Objects.equals(title, news.title) &&
                 Objects.equals(description, news.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, department_id, title, description);
+        return Objects.hash(id, news_type, department_id, title, description);
     }
 }
