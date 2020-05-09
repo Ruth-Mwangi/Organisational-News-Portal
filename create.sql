@@ -11,7 +11,7 @@ size int
 CREATE TABLE news (
 id SERIAL PRIMARY KEY,
 news_type VARCHAR,
-department_name VARCHAR,
+department_id INT,
 title VARCHAR,
 description VARCHAR
 );
