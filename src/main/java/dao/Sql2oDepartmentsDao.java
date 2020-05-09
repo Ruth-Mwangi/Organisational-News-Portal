@@ -50,4 +50,13 @@ public class Sql2oDepartmentsDao implements DepartmentsDao {
     public List<Users> getAllUsersInDepartment(int id) {
         return null;
     }
+
+    @Override
+    public void clearAll() {
+        try (Connection con=sql2o.open()){
+            String sql="DELETE FROM departments";
+            con.createQuery(sql).executeUpdate();
+
+        }
+    }
 }

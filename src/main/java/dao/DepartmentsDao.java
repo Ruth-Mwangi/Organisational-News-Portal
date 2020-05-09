@@ -17,5 +17,6 @@ public interface DepartmentsDao {
     List<Users> getAllUsersInDepartment(int id);
     //update
     //delete
+    void clearAll();
 
 }
