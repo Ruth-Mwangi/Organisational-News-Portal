@@ -54,6 +54,12 @@ public class Sql2oDepartmentsDaoTest {
 
     @Test
     public void getAll() {
+        Departments department=setUpNewDepartment();
+        Departments otherDepartment=new Departments("printing");
+        sql2oDepartmentsDao.add(department);
+        sql2oDepartmentsDao.add(otherDepartment);
+        assertEquals(department,sql2oDepartmentsDao.getAll().get(0));
+        assertEquals(otherDepartment,sql2oDepartmentsDao.getAll().get(1));
     }
 
     @Test
