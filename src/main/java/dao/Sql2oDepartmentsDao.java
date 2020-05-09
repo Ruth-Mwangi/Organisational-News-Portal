@@ -34,6 +34,17 @@ public class Sql2oDepartmentsDao implements DepartmentsDao {
     @Override
     public void addUserToDepartment(Users user, Departments department) {
 
+        try(Connection con=sql2o.open()) {
+            String sql="INSERT INTO users_departments (user_id,department_id) VALUES (:user_id,department_id";
+            con.createQuery(sql)
+                    .addParameter("user_id",user.getId())
+                    .addParameter("department_id",department.getId())
+                    .executeUpdate();
+
+        }catch (Sql2oException e){
+            System.out.println(e);
+        }
+
     }
 
     @Override
@@ -59,7 +70,13 @@ public class Sql2oDepartmentsDao implements DepartmentsDao {
 
     @Override
     public List<Users> getAllUsersInDepartment(int id) {
-        return null;
+
+        try (Connection con=sql2o.open()){
+            String sql= "SELECT * FROM users_departments WHERE id=:id";
+            return con.createQuery(sql)
+                    .addParameter("id",id)
+                    .executeAndFetch(Users.class);
+        }
     }
 
     @Override
