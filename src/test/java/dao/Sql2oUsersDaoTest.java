@@ -1,5 +1,6 @@
 package dao;
 
+import models.Departments;
 import models.Users;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,6 +13,7 @@ import static org.junit.Assert.*;
 
 public class Sql2oUsersDaoTest {
 
+    private static Sql2oDepartmentsDao sql2oDepartmentsDao;
     private static Sql2oUsersDao sql2oUsersDao;
     private static Connection conn;
 
@@ -19,22 +21,25 @@ public class Sql2oUsersDaoTest {
     public void setUp() throws Exception {
         String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal_test";
         Sql2o sql2o = new Sql2o(connectionString, "wangui", "33234159");
+        sql2oDepartmentsDao=new Sql2oDepartmentsDao(sql2o);
         sql2oUsersDao=new Sql2oUsersDao(sql2o);
+        System.out.println("connected to database");
         conn=sql2o.open();
+
     }
 
     @After
     public void tearDown() throws Exception {
+        sql2oDepartmentsDao.clearAll();
         sql2oUsersDao.clearAll();
         System.out.println("clearing database");
-
     }
-
     @AfterClass
     public static void shutDown() throws Exception{
         conn.close();
         System.out.println("connection closed");
     }
+
 
     @Test
     public void addingUserToDbSetsUserId() {
@@ -61,9 +66,28 @@ public class Sql2oUsersDaoTest {
         assertEquals(users.getName(),sql2oUsersDao.getAll().get(0).getName());
         assertEquals(otherUser.getName(),sql2oUsersDao.getAll().get(1).getName());
     }
+    @Test
+    public void getDepartmentsUserIsIn() {
+        Departments department=setUpNewDepartment();
+        Departments otherDepartment=new Departments("printing","printing of books");
+        sql2oDepartmentsDao.add(department);
+        sql2oDepartmentsDao.add(otherDepartment);
+        Users user=setUpNewUser();
+        Users otherUser= new Users("Wangui","intern","Paper work");
+        sql2oUsersDao.add(user);
+        sql2oUsersDao.add(otherUser);
+        sql2oDepartmentsDao.addUserToDepartment(user,department);
+        sql2oDepartmentsDao.addUserToDepartment(otherUser,department);
+        sql2oDepartmentsDao.addUserToDepartment(user,otherDepartment);
+        assertEquals(2,sql2oUsersDao.getAllUserDepartments(user.getId()).size());
+        assertEquals(1,sql2oUsersDao.getAllUserDepartments(otherUser.getId()).size());
+    }
 
     //helper
     private Users setUpNewUser() {
         return new Users("Ruth Mwangi","manager","Editor");
+    }
+    private Departments setUpNewDepartment() {
+        return new Departments("Editing","editing of newspaper");
     }
 }

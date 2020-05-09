@@ -1,10 +1,12 @@
 package dao;
 
+import models.Departments;
 import models.Users;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sql2oUsersDao implements UsersDao {
@@ -43,6 +45,27 @@ public class Sql2oUsersDao implements UsersDao {
     }
 
     @Override
+    public List<Departments> getAllUserDepartments(int user_id) {
+        List<Departments> departments=new ArrayList<>();
+        try (Connection con=sql2o.open()) {
+            String sql = "SELECT department_id FROM users_departments WHERE user_id=:user_id";
+            List<Integer> departmentIds = con.createQuery(sql)
+                    .addParameter("user_id", user_id)
+                    .executeAndFetch(Integer.class);
+
+            for (Integer id : departmentIds) {
+                String userResults = "SELECT * FROM departments WHERE id=:id";
+                departments.add(con.createQuery(userResults)
+                        .addParameter("id", id)
+                        .executeAndFetchFirst(Departments.class));
+
+            }
+
+            return departments;
+        }
+    }
+
+    @Override
     public Users findById(int id) {
         try (Connection con=sql2o.open()){
             String sql=("SELECT * FROM staff WHERE id=:id");
@@ -59,6 +82,9 @@ public class Sql2oUsersDao implements UsersDao {
         try (Connection con=sql2o.open()){
             String sql ="DELETE FROM staff ";
             con.createQuery(sql).executeUpdate();
+            String sqlUsersDepartments="DELETE FROM users_departments";
+            con.createQuery(sqlUsersDepartments).executeUpdate();
+
 
         }catch (Sql2oException e){
             System.out.println(e);
