@@ -1,6 +1,8 @@
 package dao;
 
+import models.Department_News;
 import models.Departments;
+import models.News;
 import models.Users;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -9,11 +11,14 @@ import org.junit.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class Sql2oDepartmentsDaoTest {
     private static Sql2oDepartmentsDao sql2oDepartmentsDao;
     private static Sql2oUsersDao sql2oUsersDao;
+    private static Sql2oNewsDao sql2oNewsDao;
     private static Connection conn;
 
     @Before
@@ -22,6 +27,7 @@ public class Sql2oDepartmentsDaoTest {
         Sql2o sql2o = new Sql2o(connectionString, "wangui", "33234159");
         sql2oDepartmentsDao=new Sql2oDepartmentsDao(sql2o);
         sql2oUsersDao=new Sql2oUsersDao(sql2o);
+        sql2oNewsDao=new Sql2oNewsDao(sql2o);
         System.out.println("connected to database");
         conn=sql2o.open();
 
@@ -31,6 +37,7 @@ public class Sql2oDepartmentsDaoTest {
     public void tearDown() throws Exception {
         sql2oDepartmentsDao.clearAll();
         sql2oUsersDao.clearAll();
+        sql2oNewsDao.clearAll();
         System.out.println("clearing database");
     }
     @AfterClass
@@ -96,6 +103,20 @@ public class Sql2oDepartmentsDaoTest {
         sql2oDepartmentsDao.addUserToDepartment(otherUser,department);
         assertEquals(2,sql2oDepartmentsDao.getAllUsersInDepartment(department.getId()).size());
         assertEquals(2,sql2oDepartmentsDao.findById(department.getId()).getSize());
+    }
+    @Test
+    public void getDepartmentNews() {
+        Users users=setUpNewUser();
+        sql2oUsersDao.add(users);
+        Departments departments=setUpNewDepartment();
+        sql2oDepartmentsDao.add(departments);
+        Department_News department_news =new Department_News("Meeting","To nominate new chairman",departments.getId()
+                ,users.getId());
+        sql2oNewsDao.addDepartmentNews(department_news);
+        News news=new News("Meeting","Meeting to set activities for team building",users.getId());
+        sql2oNewsDao.addNews(news);
+
+        assertEquals(department_news.getTitle(),sql2oDepartmentsDao.getDepartmentNews(department_news.getId()).get(0).getTitle());
     }
 
     //helper

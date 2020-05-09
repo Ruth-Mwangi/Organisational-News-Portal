@@ -18,8 +18,8 @@ public class Sql2oNewsDao implements NewsDao {
     @Override
     public void addNews(News news) {
         try(Connection con=sql2o.open()) {
-            String sql="INSERT INTO news (news_type,department_id,title,description) VALUES (:news_type," +
-                    ":department_id,:title,:description)";
+            String sql="INSERT INTO news (news_type,department_id,user_id,title,description) VALUES (:news_type," +
+                    ":department_id,:user_id,:title,:description)";
             int id= (int) con.createQuery(sql,true)
                     .bind(news)
                     .executeUpdate()
@@ -36,8 +36,8 @@ public class Sql2oNewsDao implements NewsDao {
     @Override
     public void addDepartmentNews(Department_News department_news) {
         try(Connection con=sql2o.open()) {
-            String sql="INSERT INTO news (news_type,department_id,title,description) VALUES (:news_type," +
-                    ":department_id,:title,:description)";
+            String sql="INSERT INTO news (news_type,department_id,user_id,title,description) VALUES (:news_type," +
+                    ":department_id,:user_id,:title,:description)";
             int id= (int) con.createQuery(sql,true)
                     .bind(department_news)
                     .executeUpdate()
@@ -52,21 +52,40 @@ public class Sql2oNewsDao implements NewsDao {
 
     @Override
     public List<News> getAll() {
-        return null;
+        try(Connection con=sql2o.open()) {
+            String sql="SELECT * FROM news";
+            return con.createQuery(sql,true)
+                    .executeAndFetch(News.class);
+
+        }
     }
 
-    @Override
-    public List<News> getDepartmentNews(int department_id) {
-        return null;
-    }
+
 
     @Override
     public News findById(int id) {
-        return null;
+        try(Connection con=sql2o.open()) {
+            String sql="SELECT * FROM news WHERE id=:id";
+            return con.createQuery(sql)
+                    .addParameter("id",id)
+                    .executeAndFetchFirst(News.class);
+        }
+
     }
 
     @Override
     public void clearAll() {
+        try (Connection con=sql2o.open()){
+            String sql="DELETE FROM departments";
+            String sqlNews="DELETE FROM news";
+            String sqlUsersDepartments="DELETE FROM users_departments";
+            con.createQuery(sql).executeUpdate();
+            con.createQuery(sqlUsersDepartments).executeUpdate();
+            con.createQuery(sqlNews).executeUpdate();
+
+        }catch (Sql2oException e){
+            System.out.println(e);
+        }
 
     }
 }

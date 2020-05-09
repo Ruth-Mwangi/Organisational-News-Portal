@@ -12,6 +12,7 @@ CREATE TABLE news (
 id SERIAL PRIMARY KEY,
 news_type VARCHAR,
 department_id INT,
+user_id INT,
 title VARCHAR,
 description VARCHAR
 );
