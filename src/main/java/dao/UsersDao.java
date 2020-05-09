@@ -19,4 +19,6 @@ public interface UsersDao {
     //update
 
     //delete
+
+    void clearAll();
 }
