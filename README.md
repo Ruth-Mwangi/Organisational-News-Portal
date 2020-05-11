@@ -28,7 +28,7 @@ into any department, and others that are housed/classified within departments.
   "staff_role":"Editor"\
  }
  * Viewing User  https://organisational-news-portal-api.herokuapp.com/users 
- * Viewing Specific User https://organisational-news-portal-api.herokuapp.com/users/:id \
+ * Viewing Specific User https://organisational-news-portal-api.herokuapp.com/user/:id \
  Replace :id with id of user
  * Viewing Specific User Departments  https://organisational-news-portal-api.herokuapp.com/users/:id/departments \
  Replace :id with id of user
